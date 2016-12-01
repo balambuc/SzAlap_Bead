@@ -1,0 +1,1 @@
+SzAlap_bead
