@@ -1,7 +1,7 @@
 $tabla = New-Object 'object[,]' 8,8
-$soronbelul= @()
 $i=0
-foreach ($line in [System.IO.File]::ReadLines("be1.txt")) {
+
+foreach ($line in [System.IO.File]::ReadLines($($args[0]))) {
   For ($j = 0; $j -lt 8; ++$j)
   {
     $tabla[$i,$j]=$line.Split(" ")[$j]
@@ -44,4 +44,24 @@ For ($t = 0; $t -lt 16; ++$t)
   }
   $jo=$jo -and ($n -le 1)
 }
-$jo
+#jobbrol atlosan
+For ($t = 0; $t -lt 15; ++$t)
+{
+  $z = If ($t -lt 8) {0} Else {$t - 7}
+  $n=0
+  For ($j = $t - $z; $j -ge $z; --$j)
+  {
+    $i=$t-$j
+    $m=7-$j
+    $n+=$tabla[$m,$i]
+  }
+  $jo=$jo -and ($n -le 1)
+}
+If ($jo)
+{
+  "Helyes elrendezes!"
+}
+Else
+{
+  "Helytelen elrendezes!"
+}
